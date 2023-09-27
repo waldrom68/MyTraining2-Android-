@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rome.tech.horoscapp.R
 import com.rome.tech.horoscapp.domain.model.HoroscopeInfo
 
-class HoroscopeAdapter(private var horoscopeList: List<HoroscopeInfo> = emptyList()) :
+class HoroscopeAdapter(private var horoscopeList: List<HoroscopeInfo> = emptyList(),
+    ) :
     RecyclerView.Adapter<HoroscopeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoroscopeViewHolder {
