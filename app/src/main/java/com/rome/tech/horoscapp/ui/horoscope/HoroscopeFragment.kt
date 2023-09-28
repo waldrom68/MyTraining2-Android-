@@ -1,13 +1,11 @@
 package com.rome.tech.horoscapp.ui.horoscope
 
-import android.R.attr.text
-import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,24 +31,27 @@ class HoroscopeFragment : Fragment() {
     private lateinit var rvHoroscope: RecyclerView
     private lateinit var horoscopeAdapter: HoroscopeAdapter
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        // Inflate the layout for this fragment
+        _binding = FragmentHoroscopeBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
     }
 
     private fun initUI() {
+        initListeners()
         initList()
         initUIState()
     }
 
     private fun initList() {
-        horoscopeAdapter = HoroscopeAdapter(onItemSelected = {
-
-            var toast: Toast = Toast.makeText(this.context, it.name, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        })
-
         binding.rvHoroscope.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = horoscopeAdapter
@@ -69,30 +70,31 @@ class HoroscopeFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        // Inflate the layout for this fragment
-        _binding = FragmentHoroscopeBinding.inflate(layoutInflater, container, false)
-
-        return binding.root
+    private fun initListeners() {
+        horoscopeAdapter = HoroscopeAdapter(onItemSelected = {
+            var toast: Toast = Toast.makeText(this.context, getString(it.name), Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        })
     }
 
-
     override fun onStart() {
+        Log.i("SEMILLA", "HoroscopeFragment on onStart")
         super.onStart()
     }
 
     override fun onResume() {
+        Log.i("SEMILLA", "HoroscopeFragment on onResume")
         super.onResume()
     }
 
     override fun onPause() {
+        Log.i("SEMILLA", "HoroscopeFragment on onPause")
         super.onPause()
     }
 
     override fun onStop() {
+        Log.i("SEMILLA", "HoroscopeFragment on onStop")
         super.onStop()
     }
 
