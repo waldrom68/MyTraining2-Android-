@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rome.tech.horoscapp.databinding.FragmentHoroscopeBinding
+import com.rome.tech.horoscapp.domain.model.HoroscopeInfo
+import com.rome.tech.horoscapp.domain.model.HoroscopeModel
 import com.rome.tech.horoscapp.ui.horoscope.adapter.HoroscopeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -73,9 +75,27 @@ class HoroscopeFragment : Fragment() {
 
     private fun initListeners() {
         horoscopeAdapter = HoroscopeAdapter(onItemSelected = {
+            // Identifico la clase del item seleccionado usando HoroscopeModel
+            val type: HoroscopeModel =
+                when (it) {
+                    HoroscopeInfo.Aquarius -> HoroscopeModel.Aquarius
+                    HoroscopeInfo.Aries -> HoroscopeModel.Aries
+                    HoroscopeInfo.Cancer -> HoroscopeModel.Cancer
+                    HoroscopeInfo.Capricornus -> HoroscopeModel.Capricornus
+                    HoroscopeInfo.Gemini -> HoroscopeModel.Gemini
+                    HoroscopeInfo.Leo -> HoroscopeModel.Leo
+                    HoroscopeInfo.Libra -> HoroscopeModel.Libra
+                    HoroscopeInfo.Pisces -> HoroscopeModel.Pisces
+                    HoroscopeInfo.Sagittarius -> HoroscopeModel.Sagittarius
+                    HoroscopeInfo.Scorpius -> HoroscopeModel.Scorpius
+                    HoroscopeInfo.Taurus -> HoroscopeModel.Taurus
+                    HoroscopeInfo.Virgo -> HoroscopeModel.Virgo
+                }
+
+
             // navego de acuerdo a lo configurado en res/navigation, comentado en HoroscopeDetailActivity
             findNavController().navigate(
-                HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeDetailActivity()
+                HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeDetailActivity(type)
             )
 
             var toast: Toast = Toast.makeText(this.context, getString(it.name), Toast.LENGTH_LONG);
