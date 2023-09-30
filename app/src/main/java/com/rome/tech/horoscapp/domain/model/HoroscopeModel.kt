@@ -8,9 +8,9 @@ enum class HoroscopeModel {
     Leo,
     Virgo,
     Libra,
-    Scorpius,
+    Scorpio,
     Sagittarius,
-    Capricornus,
+    Capricorn,
     Aquarius,
     Pisces,
 }

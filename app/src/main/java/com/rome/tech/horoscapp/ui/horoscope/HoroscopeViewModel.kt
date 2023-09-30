@@ -1,7 +1,7 @@
 package com.rome.tech.horoscapp.ui.horoscope
 
 import androidx.lifecycle.ViewModel
-import com.rome.tech.horoscapp.data.HoroscopeProvider
+import com.rome.tech.horoscapp.data.provider.HoroscopeProvider
 import com.rome.tech.horoscapp.domain.model.HoroscopeInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

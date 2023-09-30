@@ -24,8 +24,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -41,6 +40,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    viewBinding { enable = true }
+
     kotlin {
         jvmToolchain(18)
     }
@@ -59,8 +61,14 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // Dagger - hilt -> inyeccion de dependencias
+    // https://mvnrepository.com/artifact/com.google.dagger/hilt-android
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
+
+    // Retrofit -> API Rest
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

@@ -81,13 +81,13 @@ class HoroscopeFragment : Fragment() {
                     HoroscopeInfo.Aquarius -> HoroscopeModel.Aquarius
                     HoroscopeInfo.Aries -> HoroscopeModel.Aries
                     HoroscopeInfo.Cancer -> HoroscopeModel.Cancer
-                    HoroscopeInfo.Capricornus -> HoroscopeModel.Capricornus
+                    HoroscopeInfo.Capricorn -> HoroscopeModel.Capricorn
                     HoroscopeInfo.Gemini -> HoroscopeModel.Gemini
                     HoroscopeInfo.Leo -> HoroscopeModel.Leo
                     HoroscopeInfo.Libra -> HoroscopeModel.Libra
                     HoroscopeInfo.Pisces -> HoroscopeModel.Pisces
                     HoroscopeInfo.Sagittarius -> HoroscopeModel.Sagittarius
-                    HoroscopeInfo.Scorpius -> HoroscopeModel.Scorpius
+                    HoroscopeInfo.Scorpio -> HoroscopeModel.Scorpio
                     HoroscopeInfo.Taurus -> HoroscopeModel.Taurus
                     HoroscopeInfo.Virgo -> HoroscopeModel.Virgo
                 }
@@ -98,9 +98,9 @@ class HoroscopeFragment : Fragment() {
                 HoroscopeFragmentDirections.actionHoroscopeFragmentToHoroscopeDetailActivity(type)
             )
 
-            var toast: Toast = Toast.makeText(this.context, getString(it.name), Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+//            var toast: Toast = Toast.makeText(this.context, getString(it.name), Toast.LENGTH_LONG);
+//            toast.setGravity(Gravity.CENTER, 0, 0);
+//            toast.show();
         })
     }
 
