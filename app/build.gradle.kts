@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -20,13 +21,26 @@ android {
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        getByName("release") {
+            release {
+                isMinifyEnabled = false
+                isDebuggable = false
+                resValue("string","varsion_app_name", "HoroscApp")
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                )
+            }
+            //no olvidar ultimo slash
+            buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
         }
+        //no olvidar ultimo slash
+        getByName("debug") {
+            isDebuggable = true
+            resValue("string","varsion_app_name", "[debug] HoroscApp")
+            buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
+        }
+
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
@@ -39,7 +53,11 @@ android {
     // View binding
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+
+    viewBinding { enable = true }
+
     kotlin {
         jvmToolchain(18)
     }
@@ -58,8 +76,16 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // Dagger - hilt -> inyeccion de dependencias
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    // https://mvnrepository.com/artifact/com.google.dagger/hilt-android
+    implementation("com.google.dagger:hilt-android:$dagger")
+    kapt("com.google.dagger:hilt-compiler:$dagger")
+
+    // Retrofit -> API Rest
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.3.1")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
