@@ -28,7 +28,7 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private fun starRotationImage(view: View, retainActionLambda: () -> Unit) {
         view.animate().apply {
-            duration = 300 // en milisegundos
+            duration = 200 // en milisegundos
             interpolator = LinearInterpolator() // el movimiento es a velocidad constante
             withEndAction(retainActionLambda)  // aqui le digo que ejecute el resto cuando termine la animacion
             rotationBy(360f)  // grados de la rotacion sobre su mismo eje
