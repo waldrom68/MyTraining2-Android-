@@ -14,14 +14,20 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.rome.tech.horoscapp.R
 import com.rome.tech.horoscapp.databinding.FragmentLuckBinding
+import com.rome.tech.horoscapp.ui.model.LuckyModel
+import com.rome.tech.horoscapp.ui.providers.RandomCardProvider
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Random
+import javax.inject.Inject
 
 @AndroidEntryPoint // Aqui le indico a dagger que esta clase recibirá dependencias
 class LuckFragment : Fragment() {
 
     private var _binding: FragmentLuckBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var randomCardProvider: RandomCardProvider
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +47,7 @@ class LuckFragment : Fragment() {
     }
 
     private fun initUI() {
+        preparePredictionCard()
         initListeners()
     }
 
@@ -91,6 +98,7 @@ class LuckFragment : Fragment() {
             }
 
             override fun onAnimationEnd(animation: Animation?) {
+                binding.ivSmallCard.isVisible = false
                 showPremonitionView()
 
             }
@@ -102,7 +110,6 @@ class LuckFragment : Fragment() {
     }
 
     private fun showPremonitionView() {
-
         val disappearAnimation = AlphaAnimation(1.0f, 0.0f)
         disappearAnimation.duration = 400
 
@@ -110,12 +117,11 @@ class LuckFragment : Fragment() {
         appearAnimation.duration = 1000
 
         disappearAnimation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {}
-            override fun onAnimationEnd(animation: Animation?) {
+            override fun onAnimationStart(animation: Animation?) {
                 binding.layoutPreview.isVisible = false
                 binding.layoutPrediction.isVisible = true
             }
-
+            override fun onAnimationEnd(animation: Animation?) {}
             override fun onAnimationRepeat(animation: Animation?) {}
         })
 
@@ -124,4 +130,13 @@ class LuckFragment : Fragment() {
 
 
     }
+
+    private fun preparePredictionCard() {
+        val luck: LuckyModel? = randomCardProvider.getLucky()
+        luck?.let {
+            binding.tvLucky.text = getString(it.text)
+            binding.ivLuckyCard.setImageResource(it.image)
+        }
+    }
+
 }

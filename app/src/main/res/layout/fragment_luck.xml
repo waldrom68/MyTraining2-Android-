@@ -72,28 +72,30 @@
             app:layout_constraintHeight_percent="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/red" />
+            tools:src="@drawable/card_back"/>
 
         <TextView
             android:id="@+id/tvLucky"
             style="@style/tvBodyDetailComponent"
-            android:gravity="center"
-            android:text="ESTA ES UNA PRUEBA"
-            android:layout_margin="16dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@id/tvShare"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivLuckyCard" />
+            app:layout_constraintTop_toBottomOf="@id/ivLuckyCard"
+            tools:text="ESTA ES UNA PRUEBA" />
+
         <TextView
             android:id="@+id/tvShare"
             style="@style/tvBodyDetailComponent"
-            android:gravity="center"
-            android:text="@string/share"
-            android:layout_margin="16dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:paddingBottom="16dp"
+            android:gravity="center"
+            android:text="@string/share"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
