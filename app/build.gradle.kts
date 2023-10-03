@@ -36,7 +36,7 @@ android {
         //no olvidar ultimo slash
         getByName("debug") {
             isDebuggable = true
-            resValue("string","varsion_app_name", "[debug] HoroscApp")
+            resValue("string","varsion_app_name", "HoroscApp - debug")
             buildConfigField("String", "BASE_URL", "\"https://newastro.vercel.app/\"")
         }
 
