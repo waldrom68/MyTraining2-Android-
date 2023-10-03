@@ -1,6 +1,8 @@
 package com.rome.tech.horoscapp.ui.luck
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.rome.tech.horoscapp.R
 import com.rome.tech.horoscapp.databinding.FragmentLuckBinding
+import com.rome.tech.horoscapp.ui.core.listeners.OnSwipeTouchListener
 import com.rome.tech.horoscapp.ui.model.LuckyModel
 import com.rome.tech.horoscapp.ui.providers.RandomCardProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,13 +54,30 @@ class LuckFragment : Fragment() {
         initListeners()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initListeners() {
-        binding.ivRoulette.setOnClickListener { spinRoulette() }
+//        binding.ivRoulette.setOnClickListener { spinRoulette() }
+        binding.ivRoulette.setOnTouchListener(
+        object : OnSwipeTouchListener(requireContext()) {
+            val random = Random()
+            var degree = 360
+
+            override fun onSwipeRight() {
+                degree = random.nextInt(1440) + 360
+                spinRoulette(degree)
+            }
+
+            override fun onSwipeLeft() {
+                degree = random.nextInt(1440)*(-1) - 360
+                spinRoulette(degree)
+            }
+
+        })
     }
 
-    private fun spinRoulette() {
-        val random = Random()
-        val degree = random.nextInt(1440) + 360
+    private fun spinRoulette(degree:Int) {
+//        val random = Random()
+//        val degree = random.nextInt(1440) + 360
 
         val animator: ObjectAnimator =
             ObjectAnimator.ofFloat(binding.ivRoulette, View.ROTATION, 0f, degree.toFloat())
@@ -121,6 +141,7 @@ class LuckFragment : Fragment() {
                 binding.layoutPreview.isVisible = false
                 binding.layoutPrediction.isVisible = true
             }
+
             override fun onAnimationEnd(animation: Animation?) {}
             override fun onAnimationRepeat(animation: Animation?) {}
         })
@@ -134,9 +155,26 @@ class LuckFragment : Fragment() {
     private fun preparePredictionCard() {
         val luck: LuckyModel? = randomCardProvider.getLucky()
         luck?.let {
-            binding.tvLucky.text = getString(it.text)
+            val currentPrediction: String = getString(it.text)
+            binding.tvLucky.text = currentPrediction
             binding.ivLuckyCard.setImageResource(it.image)
+
+            binding.tvShare.setOnClickListener {
+                shareResult(currentPrediction)
+            }
         }
     }
 
+    private fun shareResult(prediction: String) {
+        // un Intent de camara no requiere autorizacion, por ejemplo, porque está fuera de nuestra app
+
+        val sendIntent: Intent = Intent().apply {
+//        action = Intent.ACTION_SCREEN_OFF
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, prediction)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
 }
