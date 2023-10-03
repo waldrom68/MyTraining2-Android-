@@ -1,6 +1,7 @@
 package com.rome.tech.horoscapp.ui.luck
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -121,6 +122,7 @@ class LuckFragment : Fragment() {
                 binding.layoutPreview.isVisible = false
                 binding.layoutPrediction.isVisible = true
             }
+
             override fun onAnimationEnd(animation: Animation?) {}
             override fun onAnimationRepeat(animation: Animation?) {}
         })
@@ -134,9 +136,26 @@ class LuckFragment : Fragment() {
     private fun preparePredictionCard() {
         val luck: LuckyModel? = randomCardProvider.getLucky()
         luck?.let {
-            binding.tvLucky.text = getString(it.text)
+            val currentPrediction: String = getString(it.text)
+            binding.tvLucky.text = currentPrediction
             binding.ivLuckyCard.setImageResource(it.image)
+
+            binding.tvShare.setOnClickListener {
+                shareResult(currentPrediction)
+            }
         }
     }
 
+    private fun shareResult(prediction: String) {
+        // un Intent de camara no requiere autorizacion, por ejemplo, porque está fuera de nuestra app
+
+        val sendIntent: Intent = Intent().apply {
+//        action = Intent.ACTION_SCREEN_OFF
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, prediction)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
 }
