@@ -33,7 +33,7 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
             e1: MotionEvent?,
             e2: MotionEvent,
             velocityX: Float,
-            velocityY: Float
+            velocityY: Float,
         ): Boolean {
             var result = false
             try {
@@ -66,9 +66,13 @@ open class OnSwipeTouchListener(context: Context) : View.OnTouchListener {
 
     }
 
-    open fun onSwipeRight() {}
+    open fun onSwipeRight(): Boolean {
+        return true
+    }
 
-    open fun onSwipeLeft() {}
+    open fun onSwipeLeft(): Boolean {
+        return true
+    }
 
     open fun onSwipeTop() {}
 

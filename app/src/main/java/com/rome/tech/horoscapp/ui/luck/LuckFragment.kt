@@ -1,7 +1,6 @@
 package com.rome.tech.horoscapp.ui.luck
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +15,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.rome.tech.horoscapp.R
 import com.rome.tech.horoscapp.databinding.FragmentLuckBinding
-import com.rome.tech.horoscapp.ui.core.listeners.OnSwipeTouchListener
 import com.rome.tech.horoscapp.ui.model.LuckyModel
 import com.rome.tech.horoscapp.ui.providers.RandomCardProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,28 +52,40 @@ class LuckFragment : Fragment() {
         initListeners()
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    //    @SuppressLint("ClickableViewAccessibility")
     private fun initListeners() {
-//        binding.ivRoulette.setOnClickListener { spinRoulette() }
-        binding.ivRoulette.setOnTouchListener(
-        object : OnSwipeTouchListener(requireContext()) {
+        // Prepare backListener
+        binding.ivLuckBack.setOnClickListener {
+            binding.layoutPreview.isVisible = true
+            binding.layoutPrediction.isVisible = false
+        }
+
+        binding.ivRoulette.setOnClickListener {
             val random = Random()
             var degree = 360
+            degree = random.nextInt(1440) + 360
+            spinRoulette(degree)
+        }
 
-            override fun onSwipeRight() {
-                degree = random.nextInt(1440) + 360
-                spinRoulette(degree)
-            }
-
-            override fun onSwipeLeft() {
-                degree = random.nextInt(1440)*(-1) - 360
-                spinRoulette(degree)
-            }
-
-        })
+//        binding.ivRoulette.setOnTouchListener(
+//        object : OnSwipeTouchListener(requireContext()) {
+//            val random = Random()
+//            var degree = 360
+//
+//            override fun onSwipeRight() {
+//                degree = random.nextInt(1440) + 360
+//                spinRoulette(degree)
+//            }
+//
+//            override fun onSwipeLeft() {
+//                degree = random.nextInt(1440)*(-1) - 360
+//                spinRoulette(degree)
+//            }
+//
+//        })
     }
 
-    private fun spinRoulette(degree:Int) {
+    private fun spinRoulette(degree: Int) {
 //        val random = Random()
 //        val degree = random.nextInt(1440) + 360
 

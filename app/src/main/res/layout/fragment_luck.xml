@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="invisible">
 
         <ImageView
             android:id="@+id/ivRoulette"
@@ -26,6 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
 
         <ImageView
             android:id="@+id/ivSmallCard"
@@ -39,16 +40,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivBackCard"
-            android:layout_width="0dp"
+
+        <TextView
+            android:id="@+id/tvHelp"
+            style="@style/tvBodyDetailComponent"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:src="@drawable/card_back"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/ivRoulette"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/robotolight"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/spin_your_luck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -72,7 +75,7 @@
             app:layout_constraintHeight_percent="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/card_back"/>
+            tools:src="@drawable/card_back" />
 
         <TextView
             android:id="@+id/tvLucky"
@@ -80,6 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="16dp"
+            android:fontFamily="@font/robotolight"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@id/tvShare"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,15 +97,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:paddingBottom="16dp"
             android:gravity="center"
+            android:paddingBottom="16dp"
             android:text="@string/share"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvLucky" />
 
+
+        <ImageView
+            android:id="@+id/ivLuckBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/secondary" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
