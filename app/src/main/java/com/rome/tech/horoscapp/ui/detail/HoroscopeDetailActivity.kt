@@ -52,7 +52,6 @@ class HoroscopeDetailActivity : AppCompatActivity() {
         horoscopeDetailViewModel.getHoroscope(args.type)
         initUI()
 
-
     }
 
     private fun initUI() {
